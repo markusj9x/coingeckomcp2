@@ -6,4 +6,4 @@ services:
     startCommand: python coingecko_server.py
     envVars:
       - key: PORT
-        value: "8001"
+        value: "8002"
