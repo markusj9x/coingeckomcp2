@@ -15,20 +15,14 @@ class Config:
     PORT = int(os.environ.get("PORT", 8001))  # Changed default port
     COINGECKO_API_URL = "https://api.coingecko.com/api/v3"
     LOG_LEVEL = logging.INFO
-    LOG_FORMAT = "%(log_color)s%(levelname)s%(reset)s:     %(message)s"
     LOGGER_NAME = "coingecko-mcp-server"
 
-    @classmethod
-    def setup_logger(cls):
-        logger = logging.getLogger(cls.LOGGER_NAME)
-        handler = logging.StreamHandler()
-        formatter = logging.Formatter(cls.LOG_FORMAT)
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
-        logger.setLevel(cls.LOG_LEVEL)
-        return logger
-
-logger = Config.setup_logger()
+logger = logging.getLogger(Config.LOGGER_NAME)
+logger.setLevel(Config.LOG_LEVEL)
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 # MCP Server Implementation
 class CoinGeckoServer:
