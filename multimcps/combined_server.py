@@ -122,7 +122,7 @@ class MultiMCPServer:
                     raise ValueError("coin_id is required")
                 price_data = await self.get_coin_price(coin_id)
                 return [{"type": "text", "text": str(price_data)}]
-            elif name == "search_twitter_mentions":
+            else:
                 keywords = arguments.get("keywords")
                 if not keywords:
                     raise ValueError("keywords is required")
