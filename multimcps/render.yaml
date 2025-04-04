@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: multimcps-server
+    runtime: python3
+    buildCommand: pip install -r multimcps/requirements.txt
+    startCommand: python multimcps/combined_server.py
+    envVars:
+      - key: PORT
+        value: "8003"
+      - key: ELFA_API_KEY
+        value: "elfak_9da97adea0a74a1b78d414d846c160f8ecb180b4"
