@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: coingecko-mcp-server
+    runtime: python3
+    buildCommand: pip install -r requirements.txt
+    startCommand: python coingecko_server.py
+    envVars:
+      - key: PORT
+        value: "8001"
