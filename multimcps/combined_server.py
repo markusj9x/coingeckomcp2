@@ -22,7 +22,7 @@ class Config:
 logger = logging.getLogger(Config.LOGGER_NAME)
 logger.setLevel(Config.LOG_LEVEL)
 handler = logging.StreamHandler()
-formatter = logging.Formatter(Config.LOG_FORMAT)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
@@ -122,7 +122,7 @@ class MultiMCPServer:
                     raise ValueError("coin_id is required")
                 price_data = await self.get_coin_price(coin_id)
                 return [{"type": "text", "text": str(price_data)}]
-            else:
+            elif name == "search_twitter_mentions":
                 keywords = arguments.get("keywords")
                 if not keywords:
                     raise ValueError("keywords is required")
@@ -139,6 +139,7 @@ class MultiMCPServer:
 
         messages_path = "/messages/"
         sse = SseServerTransport(messages_path)
+        await self.initialize()
 
         async def handle_sse(request):
             async with sse.connect_sse(request.scope, request.receive, request._send) as streams:
